@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/api/server";
+import supabase from "@/api/client";
 
 export async function POST() {
-    
-    const supabase = await createClient();
-
     const { error } = await supabase.auth.signOut();
 
     if (error) {
@@ -14,5 +11,8 @@ export async function POST() {
         );
     }
 
-    return new NextResponse(null, { status: 204 });
+    return new NextResponse(
+        null, 
+        { status: 204 }
+    );
 }
