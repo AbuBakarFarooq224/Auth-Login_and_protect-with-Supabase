@@ -228,25 +228,6 @@ The interactive API documentation lives at **`http://localhost:3000/docs`**. It 
 
 Routes matched by the middleware: `/protected/:path*` and `/auth/logout`.
 
----
-
-## Publish to GitHub
-
-```bash
-# already in the repo? start here; otherwise git init first
-git init
-git add .
-git commit -m "Auth API: signup, login, logout, protected routes + Swagger"
-
-# connect your remote (create an empty repo on github.com first)
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git branch -M main
-git push -u origin main
-```
-
-> Your `SUPABASE_URL` and `SUPABASE_ANON_KEY` stay safe — `.env.local` is gitignored, and a clone of the repo won't include them. Anyone who clones must create their own Supabase project and env file (steps 2–3 above).
-
----
 
 ## Troubleshooting
 
