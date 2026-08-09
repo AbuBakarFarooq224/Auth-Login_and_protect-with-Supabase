@@ -1,18 +1,31 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/api/server";
+import supabase from "@/api/client";
 
-export async function POST() {
-    
-    const supabase = await createClient();
+export async function POST(request) {
+    const { email, password } = await request.json();
 
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
+    if (!email || !password) {
         return NextResponse.json(
-            { error: "Logout failed" },
-            { status: 500 }
+            { error: "Email and password are required" },
+            { status: 400 }
         );
     }
 
-    return new NextResponse(null, { status: 204 });
-}
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
+
+    if (error) {
+        return NextResponse.json(
+            { error: error.message },
+            { status: 400 }
+        );
+    }
+    if (data) {
+    return NextResponse.json(
+        { message: "User created successfully" },
+        { status: 201 }
+    );
+ 
+}}
